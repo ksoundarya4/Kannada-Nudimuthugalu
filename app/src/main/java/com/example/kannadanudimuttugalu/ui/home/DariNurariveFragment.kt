@@ -7,9 +7,10 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import com.example.kannadanudimuttugalu.R
 import com.example.kannadanudimuttugalu.databinding.FragmentHomeBinding
 
-class HomeFragment : Fragment() {
+class DariNurariveFragment : Fragment() {
 
     private var _binding: FragmentHomeBinding? = null
 
@@ -23,17 +24,19 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+            ViewModelProvider(this)[DariNurariveViewModel::class.java]
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
-        val root: View = binding.root
 
-        val textView: TextView = binding.textHome
-        homeViewModel.text.observe(viewLifecycleOwner) {
-            textView.text = it
-        }
-        return root
+        setUpToolbar()
+
+        return binding.root
     }
+
+    private fun setUpToolbar(){
+        activity?.actionBar?.setTitle(R.string.app_name)
+    }
+
 
     override fun onDestroyView() {
         super.onDestroyView()
